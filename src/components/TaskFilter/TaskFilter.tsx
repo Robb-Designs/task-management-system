@@ -10,30 +10,35 @@ function TaskFilter({ onFilterChange }: TaskFilterProps) {
 	// Store the selected priority. Empty string means "show all".
 	const [priority, setPriority] = useState<"" | TaskPriority>("");
 
+	const [sortBy, setSortBy] = useState<"" | "dueDate" | "priority" | "title">("");
+
 	// Send the latest filter values to the parent component.
-	const emitFilters = (nextCategory: "" | TaskStatus, nextPriority: "" | TaskPriority) => {
+	const emitFilters = (nextCategory: "" | TaskStatus, nextPriority: "" | TaskPriority, nextSortBy: "" | "dueDate" | "priority" | "title") => {
 		onFilterChange({
+			//these lines below only include the filter in the emitted object if it has a value (not an empty string)
 			...(nextCategory ? { status: nextCategory } : {}),
 			...(nextPriority ? { priority: nextPriority } : {}),
+			...(nextSortBy ? { sortBy: nextSortBy } : {}),
 		});
 	};
 
 	// Update category and apply new filter set.
 	const handleCategoryChange = (value: "" | TaskStatus) => {
 		setCategory(value);
-		emitFilters(value, priority);
+		emitFilters(value, priority, sortBy);
 	};
 
 	// Update priority 
 	const handlePriorityChange = (value: "" | TaskPriority) => {
 		setPriority(value);
-		emitFilters(category, value);
+		emitFilters(category, value, sortBy);
 	};
 
 	// Resets both dropdowns and remove all filters.
 	const clearFilters = () => {
 		setCategory("");
 		setPriority("");
+		setSortBy("");
 		onFilterChange({});
 	};
 
@@ -64,6 +69,23 @@ function TaskFilter({ onFilterChange }: TaskFilterProps) {
 				<option value="medium">Medium</option>
 				<option value="high">High</option>
 			</select>
+
+			{/* Sort dropdown */}
+<label htmlFor="sort-filter">Sort By</label>
+<select
+    id="sort-filter"
+    value={sortBy}
+    onChange={e => {
+        setSortBy(e.target.value as '' | 'dueDate' | 'priority' | 'title');
+        emitFilters(category, priority, e.target.value as '' | 'dueDate' | 'priority' | 'title');
+    }}
+>
+    <option value="">Default</option>
+    <option value="dueDate">Due Date</option>
+    <option value="priority">Priority</option>
+    <option value="title">Title</option>
+</select>
+
 
 			{/* Button to clear all selected filters */}
 			<button type="button" onClick={clearFilters}>
