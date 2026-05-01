@@ -63,11 +63,36 @@ function App() {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
+  const visibleTasks = useMemo(() => {
+    let result = [...tasks];
+
+    if (filters.status) {
+      result = result.filter((task) => task.status === filters.status);
+    }
+
+    if (filters.priority) {
+      result = result.filter((task) => task.priority === filters.priority);
+    }
+
+    if (filters.sortBy === "dueDate") {
+      result.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+    } else if (filters.sortBy === "priority") {
+      result.sort(
+        (a, b) => priorityRank[b.priority] - priorityRank[a.priority],
+      );
+    } else if (filters.sortBy === "title") {
+      result.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    return result;
+  }, [tasks, filters]);
+
   return (
     <>
       <section id="center">
+        <TaskFilter onFilterChange={setFilters} />
         <TaskList
-          tasks={tasks}
+          tasks={visibleTasks}
           onStatusChange={handleStatusChange}
           onDelete={handleDelete}
         />
