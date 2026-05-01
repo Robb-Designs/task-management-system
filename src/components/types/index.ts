@@ -2,6 +2,7 @@
 
 
 export type TaskStatus = 'pending' | 'in-progress' | 'completed';
+export type SortBy = 'dueDate' | 'priority' | 'title';
 
 export interface Task {
     id: string;
@@ -36,5 +37,6 @@ export interface TaskFilterProps {
     onFilterChange: (filters: {
         status?: TaskStatus;
         priority?: 'low' | 'medium' | 'high';
+        sortBy?: SortBy;
     }) => void;
 };
