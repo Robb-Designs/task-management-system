@@ -1,5 +1,12 @@
 import type { TaskItemProps, TaskStatus } from "../types";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 // A mapping from task status values to their display labels.
 //this will be used to show a more user-friendly label for the task status in the UI, instead of showing the raw status value.
@@ -12,20 +19,42 @@ const StatusLabel: Record<TaskStatus, string> = {
 export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
   // Determine if the task is overdue by comparing the current date with the task's due date, but only if the task is not completed.
   const isOverdue =
-  task.status !== "completed" && new Date(task.dueDate) < new Date();
+    task.status !== "completed" && new Date(task.dueDate) < new Date();
 
   return (
-    <div className={`task-item task-item--${task.status}`}>
-      <div className="task-item">
-        {/* Show an "Overdue" badge if the task is overdue and not completed. */}
-        <h3 className={task.status === "completed" ? "task-item-title-completed" : "task-item-title"}>{task.title}</h3>
-        <p>{task.description}</p>
-        <p>Status: {StatusLabel[task.status]}</p>
-        {/* Show the priority badge with a class that reflects the priority level (e.g., low, medium, high). */}
-        <span className={`task-item__priority-badge task-item__priority-badge--${task.priority}`}>
-          {task.priority}
-        </span>
-        <p className={isOverdue ? "text-destructive font-semibold" : ""}>{isOverdue ? "Overdue: " : "Due Date: "}{task.dueDate}</p>
+    <Card className={`task-item task-item--${task.status}`}>
+      
+        <CardHeader>
+          <CardTitle>
+            {/* Show an "Overdue" badge if the task is overdue and not completed. */}
+            <h3
+              className={
+                task.status === "completed"
+                  ? "task-item-title-completed"
+                  : "task-item-title"
+              }
+            >
+              {task.title}
+            </h3>
+          </CardTitle>
+          <p>{task.description}</p>
+        </CardHeader>
+
+        <CardContent>
+          <p>Status: {StatusLabel[task.status]}</p>
+          {/* Show the priority badge with a class that reflects the priority level (e.g., low, medium, high). */}
+          <span
+            className={`task-item__priority-badge task-item__priority-badge--${task.priority}`}
+          >
+            {task.priority}
+          </span>
+          <p className={isOverdue ? "text-destructive font-semibold" : ""}>
+            {isOverdue ? "Overdue: " : "Due Date: "}
+            {task.dueDate}
+          </p>
+        </CardContent>
+
+        <CardFooter>
         <select
           value={task.status}
           onChange={(e) =>
@@ -37,7 +66,8 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
           <option value="completed">Completed</option>
         </select>
         <button onClick={() => onDelete(task.id)}>Delete</button>
-      </div>
-    </div>
+        </CardFooter>
+     
+    </Card>
   );
 }
