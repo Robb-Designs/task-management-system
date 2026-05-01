@@ -1,8 +1,19 @@
 // TYPES FOR COMPONENTS--------------------------------------------------------------------------------------
 
-
+// TaskStatus represents the current state of a task, which can be 'pending', 'in-progress', or 'completed'.
 export type TaskStatus = 'pending' | 'in-progress' | 'completed';
+
+// sortBy represents the criteria by which tasks can be sorted, such as by due date, priority, or title.
 export type SortBy = 'dueDate' | 'priority' | 'title';
+
+// Filters represents the possible filters that can be applied to the task list, including status, priority, and sorting criteria.
+export type Filters = {
+    status?: TaskStatus;
+    priority?: 'low' | 'medium' | 'high';
+    sortBy?: SortBy;
+};
+
+
 
 export interface Task {
     id: string;
