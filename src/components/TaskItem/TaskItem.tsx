@@ -1,4 +1,5 @@
 import type { TaskItemProps, TaskStatus } from "../types";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 
 // A mapping from task status values to their display labels.
 //this will be used to show a more user-friendly label for the task status in the UI, instead of showing the raw status value.
