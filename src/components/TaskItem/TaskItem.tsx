@@ -10,6 +10,14 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+
 // A mapping from task status values to their display labels.
 //this will be used to show a more user-friendly label for the task status in the UI, instead of showing the raw status value.
 const StatusLabel: Record<TaskStatus, string> = {
@@ -59,6 +67,7 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
           <option value="in-progress">In Progress</option>
           <option value="completed">Completed</option>
         </select>
+        
         <Button variant="destructive" onClick={() => onDelete(task.id)}>
           Delete
         </Button>
