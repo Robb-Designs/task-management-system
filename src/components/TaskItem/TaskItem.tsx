@@ -9,7 +9,10 @@ const StatusLabel: Record<TaskStatus, string> = {
 };
 
 export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
-  
+  // Determine if the task is overdue by comparing the current date with the task's due date, but only if the task is not completed.
+  const isOverdue =
+  task.status !== "completed" && new Date(task.dueDate) < new Date();
+
   return (
     <div className={`task-item task-item--${task.status}`}>
       <div className="task-item">
@@ -21,7 +24,7 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
         <span className={`task-item__priority-badge task-item__priority-badge--${task.priority}`}>
           {task.priority}
         </span>
-        <p>Due Date: {task.dueDate}</p>
+        <p className={isOverdue ? "text-destructive font-semibold" : ""}>{isOverdue ? "Overdue: " : "Due Date: "}{task.dueDate}</p>
         <select
           value={task.status}
           onChange={(e) =>
