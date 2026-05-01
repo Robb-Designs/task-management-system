@@ -3,7 +3,7 @@ import type { SortBy, Task, TaskStatus, Filters } from "./components/types";
 import TaskFilter from "./components/TaskFilter/TaskFilter";
 import TaskList from "./components/TaskList/TaskList";
 
-import './App.css'
+import "./App.css";
 
 const Tasks: Task[] = [
   {
@@ -40,14 +40,21 @@ const Tasks: Task[] = [
   },
 ];
 
+// A mapping from task status values to their display labels.
+const priorityRank: Record<"low" | "medium" | "high", number> = {
+  low: 1,
+  medium: 2,
+  high: 3,
+};
+
 function App() {
   const [tasks, setTasks] = useState<Task[]>(Tasks);
 
   const handleStatusChange = (taskId: string, newStatus: TaskStatus) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.id === taskId ? { ...task, status: newStatus } : task
-      )
+        task.id === taskId ? { ...task, status: newStatus } : task,
+      ),
     );
   };
 
@@ -58,11 +65,14 @@ function App() {
   return (
     <>
       <section id="center">
-        <TaskList tasks={tasks} onStatusChange={handleStatusChange} onDelete={handleDelete} />
+        <TaskList
+          tasks={tasks}
+          onStatusChange={handleStatusChange}
+          onDelete={handleDelete}
+        />
       </section>
-     
     </>
-  )
+  );
 }
 
-export default App
+export default App;
