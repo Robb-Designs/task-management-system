@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import type { Task, TaskStatus } from './components/types';
-import TaskList from './components/TaskList/TaskList.tsx';
+import { useMemo, useState } from "react";
+import type { SortBy, Task, TaskStatus } from "./components/types";
+import TaskFilter from "./components/TaskFilter/TaskFilter";
+import TaskList from "./components/TaskList/TaskList";
 
 import './App.css'
 
