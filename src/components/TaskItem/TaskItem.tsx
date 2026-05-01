@@ -57,17 +57,22 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
       </CardContent>
 
       <CardFooter>
-        <select
+        <Select
           value={task.status}
-          onChange={(e) =>
-            onStatusChange(task.id, e.target.value as TaskStatus)
+          onValueChange={(value) =>
+            onStatusChange(task.id, value as TaskStatus)
           }
         >
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-        
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="pending">Pending</SelectItem>
+            <SelectItem value="in-progress">In Progress</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+          </SelectContent>
+        </Select>
+
         <Button variant="destructive" onClick={() => onDelete(task.id)}>
           Delete
         </Button>
