@@ -2,7 +2,11 @@ import type { TaskItemProps, TaskStatus } from "../types";
 
 // A mapping from task status values to their display labels.
 //this will be used to show a more user-friendly label for the task status in the UI, instead of showing the raw status value.
-
+const StatusLabel: Record<TaskStatus, string> = {
+  pending: "Pending",
+  "in-progress": "In Progress",
+  completed: "Completed",
+};
 
 export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
   
@@ -12,7 +16,7 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
         {/* Show an "Overdue" badge if the task is overdue and not completed. */}
         <h3 className={task.status === "completed" ? "task-item-title-completed" : "task-item-title"}>{task.title}</h3>
         <p>{task.description}</p>
-        <p>Status: {task.status}</p>
+        <p>Status: {StatusLabel[task.status]}</p>
         {/* Show the priority badge with a class that reflects the priority level (e.g., low, medium, high). */}
         <span className={`task-item__priority-badge task-item__priority-badge--${task.priority}`}>
           {task.priority}
