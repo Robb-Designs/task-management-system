@@ -1,5 +1,6 @@
 import type { TaskItemProps, TaskStatus } from "../types";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -58,7 +59,9 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
           <option value="in-progress">In Progress</option>
           <option value="completed">Completed</option>
         </select>
-        <button onClick={() => onDelete(task.id)}>Delete</button>
+        <Button variant="destructive" onClick={() => onDelete(task.id)}>
+          Delete
+        </Button>
       </CardFooter>
     </Card>
   );
