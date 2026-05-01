@@ -49,6 +49,7 @@ const priorityRank: Record<"low" | "medium" | "high", number> = {
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>(Tasks);
+  const [filters, setFilters] = useState<Filters>({}); // Store the current filter settings (status, priority, sortBy)
 
   const handleStatusChange = (taskId: string, newStatus: TaskStatus) => {
     setTasks((prevTasks) =>
