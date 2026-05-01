@@ -2,16 +2,10 @@ import type { TaskItemProps, TaskStatus } from "../types";
 
 // A mapping from task status values to their display labels.
 //this will be used to show a more user-friendly label for the task status in the UI, instead of showing the raw status value.
-const StatusLabel: Record<TaskStatus, string> = {
-  pending: "Pending",
-  "in-progress": "In Progress",
-  completed: "Completed",
-};
+
 
 export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
-  const isOverdue =
-    task.status !== "completed" && new Date(task.dueDate) < new Date();
-
+  
   return (
     <div className={`task-item task-item--${task.status}`}>
       <div className="task-item">
