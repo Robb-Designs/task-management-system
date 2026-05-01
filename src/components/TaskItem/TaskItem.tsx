@@ -1,4 +1,5 @@
 import type { TaskItemProps, TaskStatus } from "../types";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardHeader,
@@ -39,11 +40,7 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
       <CardContent>
         <p>Status: {StatusLabel[task.status]}</p>
         {/* Show the priority badge with a class that reflects the priority level (e.g., low, medium, high). */}
-        <span
-          className={`task-item__priority-badge task-item__priority-badge--${task.priority}`}
-        >
-          {task.priority}
-        </span>
+        <Badge variant="outline">{task.priority}</Badge>
         <p className={isOverdue ? "text-destructive font-semibold" : ""}>
           {isOverdue ? "Overdue: " : "Due Date: "}
           {task.dueDate}
