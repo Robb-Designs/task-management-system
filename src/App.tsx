@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { SortBy, Task, TaskStatus } from "./components/types";
+import type { SortBy, Task, TaskStatus, Filters } from "./components/types";
 import TaskFilter from "./components/TaskFilter/TaskFilter";
 import TaskList from "./components/TaskList/TaskList";
 
