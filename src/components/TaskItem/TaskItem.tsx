@@ -23,38 +23,34 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
 
   return (
     <Card className={`task-item task-item--${task.status}`}>
-      
-        <CardHeader>
-          <CardTitle>
-            {/* Show an "Overdue" badge if the task is overdue and not completed. */}
-            <h3
-              className={
-                task.status === "completed"
-                  ? "task-item-title-completed"
-                  : "task-item-title"
-              }
-            >
-              {task.title}
-            </h3>
-          </CardTitle>
-          <p>{task.description}</p>
-        </CardHeader>
+      <CardHeader>
+        <CardTitle
+          className={
+            task.status === "completed"
+              ? "line-through text-muted-foreground"
+              : ""
+          }
+        >
+          {task.title}
+        </CardTitle>
+        <CardDescription>{task.description}</CardDescription>
+      </CardHeader>
 
-        <CardContent>
-          <p>Status: {StatusLabel[task.status]}</p>
-          {/* Show the priority badge with a class that reflects the priority level (e.g., low, medium, high). */}
-          <span
-            className={`task-item__priority-badge task-item__priority-badge--${task.priority}`}
-          >
-            {task.priority}
-          </span>
-          <p className={isOverdue ? "text-destructive font-semibold" : ""}>
-            {isOverdue ? "Overdue: " : "Due Date: "}
-            {task.dueDate}
-          </p>
-        </CardContent>
+      <CardContent>
+        <p>Status: {StatusLabel[task.status]}</p>
+        {/* Show the priority badge with a class that reflects the priority level (e.g., low, medium, high). */}
+        <span
+          className={`task-item__priority-badge task-item__priority-badge--${task.priority}`}
+        >
+          {task.priority}
+        </span>
+        <p className={isOverdue ? "text-destructive font-semibold" : ""}>
+          {isOverdue ? "Overdue: " : "Due Date: "}
+          {task.dueDate}
+        </p>
+      </CardContent>
 
-        <CardFooter>
+      <CardFooter>
         <select
           value={task.status}
           onChange={(e) =>
@@ -66,8 +62,7 @@ export function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
           <option value="completed">Completed</option>
         </select>
         <button onClick={() => onDelete(task.id)}>Delete</button>
-        </CardFooter>
-     
+      </CardFooter>
     </Card>
   );
 }
