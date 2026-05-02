@@ -99,23 +99,27 @@ function TaskFilter({ onFilterChange }: TaskFilterProps) {
 
       {/* Sort dropdown */}
       <label htmlFor="sort-filter">Sort By</label>
-      <select
-        id="sort-filter"
+      <Select
         value={sortBy}
-        onChange={(e) => {
-          setSortBy(e.target.value as "" | "dueDate" | "priority" | "title");
+        onValueChange={(value: string) => {
+          setSortBy(value as "" | "dueDate" | "priority" | "title");
           emitFilters(
             category,
             priority,
-            e.target.value as "" | "dueDate" | "priority" | "title",
+            value as "" | "dueDate" | "priority" | "title",
           );
         }}
       >
-        <option value="">Default</option>
-        <option value="dueDate">Due Date</option>
-        <option value="priority">Priority</option>
-        <option value="title">Title</option>
-      </select>
+        <SelectTrigger id="sort-filter">
+          <SelectValue placeholder="Default" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="">Default</SelectItem>
+          <SelectItem value="dueDate">Due Date</SelectItem>
+          <SelectItem value="priority">Priority</SelectItem>
+          <SelectItem value="title">Title</SelectItem>
+        </SelectContent>
+      </Select>
 
       {/* Button to clear all selected filters */}
       <button type="button" onClick={clearFilters}>
