@@ -58,7 +58,7 @@ function TaskFilter({ onFilterChange }: TaskFilterProps) {
   };
 
   return (
-    <div className="task-filter">
+    <div className="task-filter flex flex-col gap-4 md:flex-row md:items-center">
       {/* Category/status dropdown */}
       <label htmlFor="category-filter">Category</label>
       <Select
