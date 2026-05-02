@@ -122,7 +122,7 @@ function TaskFilter({ onFilterChange }: TaskFilterProps) {
       </Select>
 
       {/* Button to clear all selected filters */}
-      <button type="button" onClick={clearFilters}>
+      <button variant="outline" onClick={clearFilters}>
         Clear filters
       </button>
     </div>
