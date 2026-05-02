@@ -1,5 +1,14 @@
 import { useState } from "react";
 import type { TaskFilterProps, TaskStatus } from "../types";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 // Reuse the same priority options used in the task type from index.ts.
 type TaskPriority = "low" | "medium" | "high";
