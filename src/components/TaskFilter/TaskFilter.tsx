@@ -80,18 +80,22 @@ function TaskFilter({ onFilterChange }: TaskFilterProps) {
 
       {/* Priority dropdown */}
       <label htmlFor="priority-filter">Priority</label>
-      <select
-        id="priority-filter"
+      <Select
         value={priority}
-        onChange={(event) =>
-          handlePriorityChange(event.target.value as "" | TaskPriority)
+        onValueChange={(value: string) =>
+          handlePriorityChange(value as "" | TaskPriority)
         }
       >
-        <option value="">All priorities</option>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
+        <SelectTrigger id="priority-filter">
+          <SelectValue placeholder="All priorities" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="">All priorities</SelectItem>
+          <SelectItem value="low">Low</SelectItem>
+          <SelectItem value="medium">Medium</SelectItem>
+          <SelectItem value="high">High</SelectItem>
+        </SelectContent>
+      </Select>
 
       {/* Sort dropdown */}
       <label htmlFor="sort-filter">Sort By</label>
